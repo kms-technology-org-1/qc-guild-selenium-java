@@ -36,8 +36,8 @@ on:
 
 jobs:
   test-info:
-    - runs-on: ubuntu-latest
-    - steps:
+    runs-on: ubuntu-latest
+    steps:
       - name: Tests Running Information
         run: |
           echo "### Tests Running Summary :zap:" >> $GITHUB_STEP_SUMMARY
