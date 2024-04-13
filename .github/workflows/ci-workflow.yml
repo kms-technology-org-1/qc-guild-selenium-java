@@ -63,13 +63,8 @@ jobs:
         with:
           java-version: '11'
           distribution: 'zulu'
-      - name: Set up libraries for browsers
-        id: setup-libs-chrome
-        run: |
-          sudo apt update
-          sudo apt install -y libgconf-2-4 libatk1.0-0 libatk-bridge2.0-0 libgdk-pixbuf2.0-0 libgtk-3-0 libgbm-dev libnss3-dev libxss-dev libasound2 libx11-xcb1
       - name: Set up Google Chrome
-        uses: browser-actions/setup-chrome@latest
+        uses: browser-actions/setup-chrome@v1
         with:
           chrome-version: "${{ env.CHROME_VERSION }}"
       - name: Set up Firefox
