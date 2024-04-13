@@ -23,7 +23,7 @@ public class ChromeDriverFactory extends BasePage {
     }
 
     public static WebDriver initDriver() {
-        WebDriverManager.chromedriver().driverVersion("123.0.6312.05").setup();
+        WebDriverManager.chromiumdriver().driverVersion("123.0.6312.05").setup();
         driver = new ChromeDriver(chromeOptions());
         return driver;
     }
