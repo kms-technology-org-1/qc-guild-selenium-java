@@ -20,7 +20,7 @@ import java.time.Duration;
 import static org.kms.com.groupup04.utils.AppConfigs.*;
 
 public class Hooks extends BasePage {
-	protected ConfigReader config;
+	protected ConfigReader config, browser_version;
 	protected String env = System.getProperty("env") == null ? "qa" : System.getProperty("env");
 	protected String browser = System.getProperty("browser") == null ? "chrome" : System.getProperty("browser");
 	protected String headless = System.getProperty("headless") == null ? "false" : System.getProperty("headless");
@@ -28,10 +28,12 @@ public class Hooks extends BasePage {
 	@Before
 	public void setupDriver() {
 		config = new ConfigReader("src/test/resources/configs/" + env + ".properties");
-		System.out.println("Running on '" + env.toUpperCase() + "' environment with '" + browser.toUpperCase() + "' browser.");
+		browser_version = new ConfigReader("src/test/resources/configs/browser_version.properties");
+		System.out.println("Running on '" + env.toUpperCase() + "' environment with '" + browser.toUpperCase() + "' browser with version is " + browser_version.getProperty(browser) + ".");
 		switch (browser){
 			case "chrome":
 				WebDriverManager.chromedriver().setup();
+//				WebDriverManager.chromedriver().browserVersion(browser_version.getProperty(browser)).setup();
 				ChromeOptions chromeOptions = new ChromeOptions();
 				chromeOptions.addArguments("--headless");
 				chromeOptions.addArguments("--disable-gpu");
@@ -42,6 +44,7 @@ public class Hooks extends BasePage {
 				}
 				break;
 			case "firefox":
+//				WebDriverManager.firefoxdriver().browserVersion(browser_version.getProperty(browser)).setup();
 				WebDriverManager.firefoxdriver().setup();
 				FirefoxOptions firefoxOptions = new FirefoxOptions();
 				firefoxOptions.addArguments("--headless");
@@ -54,6 +57,7 @@ public class Hooks extends BasePage {
 				break;
 			case "edge":
 				WebDriverManager.edgedriver().setup();
+//				WebDriverManager.edgedriver().browserVersion(browser_version.getProperty(browser)).setup();
 				EdgeOptions edgeOptions = new EdgeOptions();
 				edgeOptions.addArguments("--headless");
 				edgeOptions.addArguments("--disable-gpu");

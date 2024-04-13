@@ -33,9 +33,6 @@ on:
         required: true
         description: 'Cucumber tags to run'
         default: '@login'
-  push:
-    branches:
-      - 'main'
 
 jobs:
   e2e-test:
