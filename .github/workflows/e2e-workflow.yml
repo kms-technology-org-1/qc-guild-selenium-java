@@ -1,4 +1,4 @@
-name: E2E Test Workflow
+name: E2E Workflow
 on:
   workflow_dispatch:
     name: on-demand
