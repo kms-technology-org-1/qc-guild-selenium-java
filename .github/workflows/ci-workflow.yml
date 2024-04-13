@@ -35,7 +35,7 @@ on:
         default: '@login'
 
 jobs:
-  e2e-test:
+  test-run:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
@@ -53,11 +53,11 @@ jobs:
       - name: Set up Firefox
         uses: browser-actions/setup-firefox@latest
         with:
-          firefox-version: "123.0.2420.81"
+          firefox-version: "124.0.2"
       - name: Set up Microsoft Edge
         uses: browser-actions/setup-edge@latest
         with:
-          edge-version: "92.0.902.67"
+          edge-version: "123.0.2420.97"
       - name: Test run
         run: |
           mvn clean test -Denv=${{ github.event.inputs.ENV }} -Dbrowser=${{ github.event.inputs.BROWSER }} -Dheadless=${{ github.event.inputs.HEADLESS }} -Dcucumber.filter.tags="${{ github.event.inputs.TAGS }}"
