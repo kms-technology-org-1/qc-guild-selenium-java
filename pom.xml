@@ -17,7 +17,7 @@
         <selenium-server-version>3.141.59</selenium-server-version>
         <cucumber-java-version>7.11.1</cucumber-java-version>
         <cucumber-testng-version>7.11.1</cucumber-testng-version>
-        <testng-version>7.7.0</testng-version>
+        <testng-version>7.1.0</testng-version>
         <reportng-version>1.1.4</reportng-version>
         <commons-io-version>2.13.0</commons-io-version>
         <extentreports-cucumber7-version>1.13.0</extentreports-cucumber7-version>
