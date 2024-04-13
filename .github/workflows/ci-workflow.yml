@@ -49,13 +49,13 @@ jobs:
         run: |
           if [ "${{ github.event.inputs.BROWSER }}" = "chrome" ]; then
             echo "Setting up Chrome browser"
-            curl -sSL https://raw.githubusercontent.com/browser-actions/setup-chrome@latest/setup.sh | bash -s -- --version "123.0.6312.105"
+            wget -qO- https://raw.githubusercontent.com/browser-actions/setup-chrome@latest/setup.sh | bash -s -- --version "123.0.6312.105"
           elif [ "${{ github.event.inputs.BROWSER }}" = "firefox" ]; then
             echo "Setting up Firefox browser"
-            curl -sSL https://raw.githubusercontent.com/browser-actions/setup-firefox@latest/setup.sh | bash -s -- --version "124.0.2"
+            wget -qO- https://raw.githubusercontent.com/browser-actions/setup-firefox@latest/setup.sh | bash -s -- --version "124.0.2"
           elif [ "${{ github.event.inputs.BROWSER }}" = "edge" ]; then
             echo "Setting up Edge browser"
-            curl -sSL https://raw.githubusercontent.com/browser-actions/setup-edge@latest/setup.sh | bash -s -- --version "stable"
+            wget -qO- https://raw.githubusercontent.com/browser-actions/setup-edge@latest/setup.sh | bash -s -- --version "stable"
           else
             echo "Unsupported browser specified."
             exit 1
