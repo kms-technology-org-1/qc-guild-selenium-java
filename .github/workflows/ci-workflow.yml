@@ -57,7 +57,7 @@ jobs:
       - name: Set up Microsoft Edge
         uses: browser-actions/setup-edge@latest
         with:
-          edge-version: "123.0.2420.97"
+          edge-version: "123.0.2420.81"
       - name: Test run
         run: |
           mvn clean test -Denv=${{ github.event.inputs.ENV }} -Dbrowser=${{ github.event.inputs.BROWSER }} -Dheadless=${{ github.event.inputs.HEADLESS }} -Dcucumber.filter.tags="${{ github.event.inputs.TAGS }}"
