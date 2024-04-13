@@ -45,21 +45,27 @@ jobs:
         with:
           java-version: '11'
           distribution: 'zulu'
-      - name: Set up Google Chrome
-        if: ${{ github.event.inputs.BROWSER }} == 'chrome'
-        uses: browser-actions/setup-chrome@latest
-        with:
-          chrome-version: "123.0.6312.105"
-      - name: Set up Firefox
-        if: ${{ github.event.inputs.BROWSER }} == 'firefox'
-        uses: browser-actions/setup-firefox@latest
-        with:
-          firefox-version: "124.0.2"
-      - name: Set up Microsoft Edge
-        if: ${{ github.event.inputs.BROWSER }} == 'edge'
-        uses: browser-actions/setup-edge@latest
-        with:
-          edge-version: "stable"
+      - name: Setup Browser
+        run: |
+          if [ "${{ github.event.inputs.BROWSER }}" = "chrome" ]; then
+            echo "Setting up Chrome browser"
+            uses: browser-actions/setup-chrome@latest
+            with:
+              chrome-version: "123.0.6312.105"
+          elif [ "${{ github.event.inputs.BROWSER }}" = "firefox" ]; then
+            echo "Setting up Firefox browser"
+            uses: browser-actions/setup-firefox@latest
+            with:
+              firefox-version: "124.0.2"
+          elif [ "${{ github.event.inputs.BROWSER }}" = "edge" ]; then
+            echo "Setting up Edge browser"
+            uses: browser-actions/setup-edge@latest
+            with:
+              edge-version: "stable"
+          else
+            echo "Unsupported browser specified."
+            exit 1
+          fi
       - name: Test run
         run: |
           mvn clean test -Denv=${{ github.event.inputs.ENV }} -Dbrowser=${{ github.event.inputs.BROWSER }} -Dheadless=${{ github.event.inputs.HEADLESS }} -Dcucumber.filter.tags="${{ github.event.inputs.TAGS }}"

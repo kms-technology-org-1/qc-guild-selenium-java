@@ -32,8 +32,8 @@ public class Hooks extends BasePage {
 		System.out.println("Running on '" + env.toUpperCase() + "' environment with '" + browser.toUpperCase() + "' browser with version is " + browser_version.getProperty(browser) + ".");
 		switch (browser){
 			case "chrome":
-				WebDriverManager.chromedriver().setup();
-//				WebDriverManager.chromedriver().browserVersion(browser_version.getProperty(browser)).setup();
+//				WebDriverManager.chromedriver().setup();
+				WebDriverManager.chromedriver().browserVersion(browser_version.getProperty(browser)).setup();
 				ChromeOptions chromeOptions = new ChromeOptions();
 				chromeOptions.addArguments("--headless");
 				chromeOptions.addArguments("--disable-gpu");
