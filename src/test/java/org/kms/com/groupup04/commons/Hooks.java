@@ -44,8 +44,8 @@ public class Hooks extends BasePage {
 				}
 				break;
 			case "firefox":
-//				WebDriverManager.firefoxdriver().browserVersion(browser_version.getProperty(browser)).setup();
-				WebDriverManager.firefoxdriver().setup();
+//				WebDriverManager.firefoxdriver().setup();
+				WebDriverManager.firefoxdriver().browserVersion(browser_version.getProperty(browser)).setup();
 				FirefoxOptions firefoxOptions = new FirefoxOptions();
 				firefoxOptions.addArguments("--headless");
 				firefoxOptions.addArguments("--disable-gpu");
@@ -56,8 +56,8 @@ public class Hooks extends BasePage {
 				}
 				break;
 			case "edge":
-				WebDriverManager.edgedriver().setup();
-//				WebDriverManager.edgedriver().browserVersion(browser_version.getProperty(browser)).setup();
+//				WebDriverManager.edgedriver().setup();
+				WebDriverManager.edgedriver().browserVersion(browser_version.getProperty(browser)).setup();
 				EdgeOptions edgeOptions = new EdgeOptions();
 				edgeOptions.addArguments("--headless");
 				edgeOptions.addArguments("--disable-gpu");

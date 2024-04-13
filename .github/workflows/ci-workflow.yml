@@ -34,6 +34,11 @@ on:
         description: 'Cucumber tags to run'
         default: '@login'
 
+env:
+  CHROME_VERSION: "123.0.6312.105"
+  FIREFOX_VERSION: "124.0.2"
+  EDGE_VERSION: "stable"
+
 jobs:
   test-info:
     runs-on: ubuntu-latest
@@ -46,15 +51,12 @@ jobs:
           echo "- **Branch tag:** ${{ github.ref_name }}" >> $GITHUB_STEP_SUMMARY
           echo "- **Test scenario tags:** ${{ github.event.inputs.TAGS }}" >> $GITHUB_STEP_SUMMARY
           echo "- **Environment:** ${{ github.event.inputs.ENV }}" >> $GITHUB_STEP_SUMMARY
-          echo "- **Browser:** ${{ github.event.inputs.BROWSER }}" >> $GITHUB_STEP_SUMMARY
+          echo "- **Browser:** ${{ github.event.inputs.BROWSER }} with version: ${{ github.event.inputs.BROWSER == 'chrome' && env.CHROME_VERSION || (github.event.inputs.BROWSER == 'firefox' && env.FIREFOX_VERSION || env.EDGE_VERSION) }}" >> $GITHUB_STEP_SUMMARY
           echo "- **Headless Mode:** ${{ github.event.inputs.HEADLESS }}" >> $GITHUB_STEP_SUMMARY
           echo "" >> $GITHUB_STEP_SUMMARY
   test-run:
+    needs: test-info
     runs-on: ubuntu-latest
-    env:
-      CHROME_VERSION: "123.0.6312.105"
-      FIREFOX_VERSION: "124.0.2"
-      EDGE_VERSION: "stable"
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
