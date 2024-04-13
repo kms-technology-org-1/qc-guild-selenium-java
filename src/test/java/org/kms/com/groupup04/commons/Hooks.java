@@ -22,6 +22,9 @@ public class Hooks extends BasePage {
 			case "firefox":
 				driver = new FirefoxDriverFactory().initDriver();
 				break;
+			case "edge":
+				driver = new EdgeDriverFactory().initDriver();
+				break;
 			default:
 				System.out.println("Not support to run tests on" + browser.toUpperCase() + " browser.");
 				break;
