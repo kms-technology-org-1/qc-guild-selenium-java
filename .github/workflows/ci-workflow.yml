@@ -34,7 +34,7 @@ on:
         default: '@login'
 
 env:
-  CHROME_VERSION: "114.0.5735.90"
+  CHROME_VERSION: "123.0.6312.105"
   FIREFOX_VERSION: "124.0.2"
 
 jobs:
