@@ -34,10 +34,10 @@ on:
         description: 'Cucumber tags to run'
         default: '@login'
 
-#env:
-#  CHROME_VERSION: "123.0.6312.105"
-#  FIREFOX_VERSION: "124.0.2"
-#  EDGE_VERSION: "stable"
+env:
+  CHROME_VERSION: "123.0.6312.122"
+  FIREFOX_VERSION: "124.0.2"
+  EDGE_VERSION: "stable"
 
 jobs:
   test-info:
@@ -65,6 +65,10 @@ jobs:
         with:
           java-version: '11'
           distribution: 'zulu'
+      - name: Set up Google Chrome
+        uses: browser-actions/setup-chrome@latest
+        with:
+          chrome-version: "${{ env.CHROME_VERSION }}"
       - name: Test run
         run: |
           mvn clean test -Denv=${{ github.event.inputs.ENV }} -Dbrowser=${{ github.event.inputs.BROWSER }} -Dheadless=${{ github.event.inputs.HEADLESS }} -Dcucumber.filter.tags="${{ github.event.inputs.TAGS }}"
