@@ -35,6 +35,20 @@ on:
         default: '@login'
 
 jobs:
+  test-info:
+    - runs-on: ubuntu-latest
+    - steps:
+      - name: Tests Running Information
+        run: |
+          echo "### Tests Running Summary :zap:" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "- **Actor:** ${{ github.actor }}" >> $GITHUB_STEP_SUMMARY
+          echo "- **Branch tag:** ${{ github.ref_name }}" >> $GITHUB_STEP_SUMMARY
+          echo "- **Test scenario tags:** ${{ github.event.inputs.TAGS }}" >> $GITHUB_STEP_SUMMARY
+          echo "- **Environment:** ${{ github.event.inputs.ENV }}" >> $GITHUB_STEP_SUMMARY
+          echo "- **Browser:** ${{ github.event.inputs.BROWSER }}" >> $GITHUB_STEP_SUMMARY
+          echo "- **Headless Mode:** ${{ github.event.inputs.HEADLESS }}" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
   test-run:
     runs-on: ubuntu-latest
     env:
@@ -68,6 +82,7 @@ jobs:
         run: |
           mvn clean test -Denv=${{ github.event.inputs.ENV }} -Dbrowser=${{ github.event.inputs.BROWSER }} -Dheadless=${{ github.event.inputs.HEADLESS }} -Dcucumber.filter.tags="${{ github.event.inputs.TAGS }}"
       - name: Upload report artifact
+        if: always()
         uses: actions/upload-artifact@v3
         with:
           name: e2e-test-reports
