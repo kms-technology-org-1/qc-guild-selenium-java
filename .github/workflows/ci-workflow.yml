@@ -18,7 +18,6 @@ on:
         options:
           - chrome
           - firefox
-          - edge
         default: "chrome"
         description: "Browser"
       HEADLESS:
@@ -33,11 +32,6 @@ on:
         required: true
         description: 'Cucumber tags to run'
         default: '@login'
-
-env:
-  CHROME_VERSION: "123.0.6312.122"
-  FIREFOX_VERSION: "124.0.2"
-  EDGE_VERSION: "stable"
 
 jobs:
   test-info:
@@ -65,15 +59,6 @@ jobs:
         with:
           java-version: '11'
           distribution: 'zulu'
-      - name: Set up libraries for browsers
-        id: setup-libs-chrome
-        run: |
-          sudo apt update
-          sudo apt install -y libgconf-2-4 libatk1.0-0 libatk-bridge2.0-0 libgdk-pixbuf2.0-0 libgtk-3-0 libgbm-dev libnss3-dev libxss-dev libasound2 libx11-xcb1
-      - name: Set up Google Chrome
-        uses: browser-actions/setup-chrome@latest
-        with:
-          chrome-version: "${{ env.CHROME_VERSION }}"
       - name: Test run
         run: |
           mvn clean test -Denv=${{ github.event.inputs.ENV }} -Dbrowser=${{ github.event.inputs.BROWSER }} -Dheadless=${{ github.event.inputs.HEADLESS }} -Dcucumber.filter.tags="${{ github.event.inputs.TAGS }}"

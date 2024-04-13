@@ -18,15 +18,15 @@ qc-guild-selenium-java
 
 ### How to run tests:
 ```java
-mvn clean test -Denv=qa -Dbrowser=chrome -Dheadless=false -Dcucumber.filter.tags="@register or @login"
+mvn clean test -Denv=qa -Dbrowser=chrome -Dheadless=false -Dcucumber.filter.tags="@login"
 ```
 * **-Denv=**: values will be 'dev' or 'qa' or 'ct'. **Default value is 'qa'.**
-* **-Dbrowser=**: values will be 'chrome' or 'firefox' or 'edge'. **Default value is 'chrome'.**
+* **-Dbrowser=**: values will be 'chrome' or 'firefox'. **Default value is 'chrome'.**
 * **-Dheadless=**: values will be 'true' or 'false'. **Default value is 'false'.**
 * **-Dcucumber.filter.tags=**: put tags representing the scenario/feature you want to run. You can run with single tag and multiple/combine tags:
   * Single tag: 
   ```java 
-    -Dcucumber.filter.tags="@register" 
+    -Dcucumber.filter.tags="@login" 
     ```
   * Multiple/combine tags:
     * Run scenarios/features MUST contain both @register and @login tags: 

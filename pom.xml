@@ -10,9 +10,11 @@
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <maven.compiler.source>11</maven.compiler.source>
-        <maven.compiler.target>11</maven.compiler.target>
-        <selenium-java-version>4.12.0</selenium-java-version>
+        <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+        <maven.compiler.source>1.8</maven.compiler.source>
+        <maven.compiler.target>1.8</maven.compiler.target>
+        <selenium-java-version>3.141.59</selenium-java-version>
+        <selenium-server-version>3.141.59</selenium-server-version>
         <cucumber-java-version>7.11.1</cucumber-java-version>
         <cucumber-testng-version>7.11.1</cucumber-testng-version>
         <testng-version>7.7.0</testng-version>
@@ -20,7 +22,8 @@
         <commons-io-version>2.13.0</commons-io-version>
         <extentreports-cucumber7-version>1.13.0</extentreports-cucumber7-version>
         <extentreports-version>5.0.9</extentreports-version>
-        <webdrivermanager-version>5.7.0</webdrivermanager-version>
+        <webdrivermanager-version>4.2.0</webdrivermanager-version>
+        <lombok.version>1.18.12</lombok.version>
     </properties>
 
     <dependencies>
@@ -28,6 +31,11 @@
             <groupId>org.seleniumhq.selenium</groupId>
             <artifactId>selenium-java</artifactId>
             <version>${selenium-java-version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.seleniumhq.selenium</groupId>
+            <artifactId>selenium-server</artifactId>
+            <version>${selenium-server-version}</version>
         </dependency>
         <dependency>
             <groupId>org.testng</groupId>
@@ -61,15 +69,15 @@
             <version>${extentreports-version}</version>
         </dependency>
         <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+            <version>${lombok.version}</version>
+        </dependency>
+        <dependency>
             <groupId>io.github.bonigarcia</groupId>
             <artifactId>webdrivermanager</artifactId>
             <version>${webdrivermanager-version}</version>
             <scope>test</scope>
-        </dependency>
-        <dependency>
-            <groupId>org.seleniumhq.selenium</groupId>
-            <artifactId>selenium-devtools-v123</artifactId>
-            <version>4.19.1</version>
         </dependency>
     </dependencies>
     <build>

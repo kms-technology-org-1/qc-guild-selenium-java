@@ -4,27 +4,25 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
-public class LoginPage {
+public class LoginPage extends BasePage{
     final WebDriver driver;
+    final String LOGIN_PAGE_URL = "/web/index.php/auth/login";
 
     public LoginPage(WebDriver driver) {
         this.driver = driver;
     }
 
-    @FindBy(xpath = "//ul[contains(@class,'main_menu')]//a[normalize-space(.)='Login or register']")
-    public WebElement eMainMenuItemRegisterLogin;
-
-    @FindBy(xpath = "//input[@name='loginname']")
+    @FindBy(xpath = "//input[@name='username']")
     public WebElement eLoginNameTextbox;
 
     @FindBy(xpath = "//input[@name='password']")
     public WebElement ePasswordTextbox;
 
-    @FindBy(xpath = "//button[@title='Login']")
+    @FindBy(xpath = "//button[contains(@type,'submit')]")
     public WebElement eLoginButton;
 
     public void navigateToLoginPage(){
-        eMainMenuItemRegisterLogin.click();
+        driver.get(config.getProperty("base_url") + LOGIN_PAGE_URL);
     }
 
     public void enterLoginName(String loginName) {
