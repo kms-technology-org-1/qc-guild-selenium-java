@@ -6,6 +6,9 @@ import io.cucumber.java.Scenario;
 import org.kms.com.groupup04.pageobjects.BasePage;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
+
+import java.time.Duration;
+import java.time.temporal.TemporalUnit;
 import java.util.concurrent.TimeUnit;
 
 import static org.kms.com.groupup04.utils.AppConfigs.*;
@@ -30,7 +33,7 @@ public class Hooks extends BasePage {
 				break;
 		}
 		driver.manage().window().maximize();
-		driver.manage().timeouts().implicitlyWait(TIMEOUT_LARGE, TimeUnit.SECONDS);
+		driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(TIMEOUT_LARGE));
 	}
 
 	@After(order=0)
