@@ -9,29 +9,10 @@
       - **Password**: admin123
 
 ### REQUIREMENTS:
-**_Based on the initial framework and web testing provided above, let’s write automation tests for 3 User Stories below:_**
+**_Based on the initial framework and web testing provided above, let’s write automation tests for an User Story below:_**
 
 ```
-User Story 01:  Password Change
-As a user, I want to be able to change my password in my ESS account.
-
-Acceptance Criteria:
-- The ESS user should be able to access the password change functionality.
-- After changing the password, the ESS user should be able to log in successfully using the new password.
-```
-
-```
-User Story 02: Update My Info
-As a user, I want to be able to update my information in my ESS account.
-
-Acceptance Criteria:
-- The user should have access to edit their personal information.
-- Changes made by the user should be reflected accurately in the account information.
-- Any updates should adhere to the records submitted by the admin account.
-```
-
-```
-User Story 03: Leave Record Submission and Approval
+User Story: Leave Record Submission and Approval
 As an ESS user, I want to be able to submit my leave records.
 As an Admin user, I want to be able to approve or reject leave records submitted by ESS users.
 
