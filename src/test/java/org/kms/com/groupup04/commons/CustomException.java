@@ -1,0 +1,7 @@
+package org.kms.com.groupup04.commons;
+
+public class CustomException extends Exception {
+    public CustomException(String message) {
+        super(message);
+    }
+}

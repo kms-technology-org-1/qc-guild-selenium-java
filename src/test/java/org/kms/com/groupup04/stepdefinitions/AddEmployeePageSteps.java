@@ -8,10 +8,12 @@ import org.openqa.selenium.support.PageFactory;
 import java.io.FileNotFoundException;
 
 public class AddEmployeePageSteps extends BasePage {
+
     AddEmployeePage addEmployeePage = PageFactory.initElements(driver, AddEmployeePage.class);
 
-    @When("user create a new employee successfully")
-    public void userCreateANewEmployeeSuccessfully() throws FileNotFoundException {
+    @When("user creates an ESS account")
+    public void createESSAccount() throws FileNotFoundException {
+        addEmployeePage.goToAddEmployeePage();
         addEmployeePage.createNewEmployee();
         addEmployeePage.verifyAlertSaveSuccessfully();
     }

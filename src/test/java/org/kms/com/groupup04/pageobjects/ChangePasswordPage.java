@@ -1,82 +1,53 @@
 package org.kms.com.groupup04.pageobjects;
 
+import org.kms.com.groupup04.commons.CustomException;
 import org.kms.com.groupup04.commons.DTOHolder;
 import org.kms.com.groupup04.data.dto.EmployeeInfo;
-import org.kms.com.groupup04.utils.DataGenerator;
-import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.FindBy;
 
-import java.util.Random;
 import java.security.SecureRandom;
+import java.util.Random;
 
 public class ChangePasswordPage extends CommonPage {
-    public static EmployeeInfo employeeInfo;
     public String newPassword;
 
-    @FindBy(xpath = "//div[@class='oxd-topbar-header-userarea']//li[contains(@class, 'oxd-userdropdown')]")
-    public WebElement eUserProfileDdl;
-
-    @FindBy(xpath = "//ul[@role='menu']//a[text()='Change Password']")
-    public WebElement eChangePasswordDdo;
+    public String ddlUserProfile = "//div[@class='oxd-topbar-header-userarea']//li[contains(@class, 'oxd-userdropdown')]";
+    public String ddoChangePassword = "//ul[@role='menu']//a[text()='Change Password']";
 
     public String dynamicUserDetailTxt = "//label[text()='%s']//parent::div/following-sibling::div/input";
     public String alertMsg = "//div[contains(@class, 'oxd-toast-content')]";
 
-    public void clickOnchangePasswordInUserProfile() {
-        waitForElementVisible(driver, eUserProfileDdl);
-        clickToElement(eUserProfileDdl);
-        waitForElementVisible(driver, eChangePasswordDdo);
-        clickToElement(eChangePasswordDdo);
+    public void clickChangePasswordInUserProfile() {
+        clickToElement(driver, ddlUserProfile);
+        clickToElement(driver, ddoChangePassword);
     }
 
-    public void generatePasswordWithLength(int passwordLength) {
-        String upperCase = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
-        String lowerCase = "abcdefghijklmnopqrstuvwxyz";
-        String number = "0123456789";
-        String symbol = "@#$%^&*()_+~|}{[]></-=";
-
-        String passwordFormat = upperCase + lowerCase + number + symbol;
-
-        Random random = new SecureRandom();
-
-        String password = generateStringOfCharacters(1, upperCase, random) +
-                generateStringOfCharacters(1, lowerCase, random) +
-                generateStringOfCharacters(1, number, random) +
-                generateStringOfCharacters(1, symbol, random) +
-                generateStringOfCharacters(passwordLength - 4, passwordFormat, random);
-
-        newPassword = password;
+    public void inputPasswordIntoField(String value, String fieldName) {
+        String newValue = "";
+        EmployeeInfo employeeInfo = DTOHolder.getInstance().getEmployeeInfoDTO();
+        if (fieldName.toLowerCase().contains("password")) {
+            if (value.equals("HRM_EMPLOYEE_PASSWORD")) {
+                newValue = employeeInfo.getPassword();
+            } else if (value.equals("HRM_EMPLOYEE_PASSWORD_RANDOMLY")) {
+                newValue = newPassword;
+                employeeInfo.setPassword(newValue);
+                DTOHolder.getInstance().setEmployeeInfoDTO(employeeInfo);
+            }
+        } else {
+            newValue = value;
+        }
+        setText(driver, newValue, dynamicUserDetailTxt, fieldName);
     }
 
     public String generateStringOfCharacters(int length, String charString, Random random) {
         StringBuilder result = new StringBuilder();
-
         while (length-- > 0) {
             int index = random.nextInt(charString.length());
             result.append(charString.charAt(index));
         }
-
         return result.toString();
     }
 
-    public void inputValueIntoField(String value, String fieldName) {
-        String newValue = "";
-        EmployeeInfo employeeInfo = DTOHolder.getInstance().getEmployeeInfoDTO();
-        if (value.equals("current password")) {
-            newValue = employeeInfo.getPassword();
-        } else if (value.equals("random password")) {
-            newValue = DataGenerator.generateRandomString(10);
-        } else if (value.equals("empty")) {
-            newValue = "";
-        } else {
-            newValue = newPassword;
-            employeeInfo.setPassword(newPassword);
-            DTOHolder.getInstance().setEmployeeInfoDTO(employeeInfo);
-        }
-        CommonPage.setText(driver, newValue, dynamicUserDetailTxt, fieldName);
-    }
-
-    public void generatePwdWithLengthAndCondition(int passwordLength, String condition) {
+    public void generatePwdWithLengthAndCondition(int passwordLength, String condition) throws CustomException {
         String upperCase = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
         String lowerCase = "abcdefghijklmnopqrstuvwxyz";
         String number = "0123456789";
@@ -130,7 +101,7 @@ public class ChangePasswordPage extends CommonPage {
                 newPassword = password;
 
                 break;
-            case "full Option":
+            case "full options":
                 password = generateStringOfCharacters(1, upperCase, random) +
                         generateStringOfCharacters(1, lowerCase, random) +
                         generateStringOfCharacters(1, number, random) +
@@ -138,6 +109,8 @@ public class ChangePasswordPage extends CommonPage {
                         generateStringOfCharacters(passwordLength - 4, passwordFormat, random);
                 newPassword = password;
                 break;
+            default:
+                throw new CustomException("The password does not meet the required conditions.");
         }
     }
 
@@ -145,5 +118,3 @@ public class ChangePasswordPage extends CommonPage {
         verifyAlert(driver, alertMsg, msg);
     }
 }
-
-

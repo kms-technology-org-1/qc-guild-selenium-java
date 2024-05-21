@@ -33,5 +33,4 @@ public class EmployeeInfo {
         this.username = username;
         this.password = password;
     }
-
 }

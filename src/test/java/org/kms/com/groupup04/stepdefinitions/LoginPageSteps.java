@@ -9,6 +9,7 @@ import org.openqa.selenium.support.PageFactory;
 import org.testng.Assert;
 
 public class LoginPageSteps extends BasePage {
+
     LoginPage loginPage = PageFactory.initElements(driver, LoginPage.class);
 
     @Given("user navigate to Login page")
@@ -32,7 +33,7 @@ public class LoginPageSteps extends BasePage {
     }
 
     @And("user login with newly created ESS account")
-    public void userLoginWithNewlyCreatedESSAccount(){
+    public void userLoginWithNewlyCreatedESSAccount() {
         loginPage.loginWithESSAccount();
     }
 

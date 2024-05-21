@@ -23,6 +23,9 @@ public class LoginPage extends CommonPage {
     @FindBy(xpath = "//ul[@role='menu']//a[text()='Logout']")
     public static WebElement eLogoutDdo;
 
+    public String ddlUserProfile = "//div[@class='oxd-topbar-header-userarea']//li[contains(@class, 'oxd-userdropdown')]";
+    public String ddoLogout = "//ul[@role='menu']//a[text()='Logout']";
+
     public void navigateToLoginPage() {
         driver.get(config.getProperty("base_url") + LOGIN_PAGE_URL);
     }
@@ -46,10 +49,8 @@ public class LoginPage extends CommonPage {
     }
 
     public void logout() {
-        waitForElementClickable(driver, eUserProfileDdl);
-        clickToElement(eUserProfileDdl);
-        waitForElementClickable(driver, eLogoutDdo);
-        clickToElement(eLogoutDdo);
+        clickToElement(driver, ddlUserProfile);
+        clickToElement(driver, ddoLogout);
     }
 
     public void loginWithESSAccount() {
@@ -57,6 +58,5 @@ public class LoginPage extends CommonPage {
         setText(eLoginNameTxt, employeeInfo.getUsername());
         setText(ePasswordTxt, employeeInfo.getPassword());
         clickLogin();
-        sleepInSecond(5);
     }
 }

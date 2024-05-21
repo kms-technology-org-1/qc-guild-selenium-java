@@ -13,7 +13,6 @@ import java.time.LocalDateTime;
 
 public class AddEmployeePage extends CommonPage {
 
-
     public static EmployeeInfo employeeInfo;
 
     @FindBy(xpath = "//input[@name='firstName']")
@@ -25,9 +24,6 @@ public class AddEmployeePage extends CommonPage {
     @FindBy(xpath = "//input[@name='lastName']")
     public WebElement eLastNameTextbox;
 
-    @FindBy(xpath = "//div[label[contains(., 'Employee Id')]]/following::input[contains(@class, 'oxd-input')]")
-    public WebElement eEmployeeIdTextbox;
-
     @FindBy(xpath = "//div[label[contains(., 'Username')]]/following::input")
     public WebElement eUserNameTextbox;
 
@@ -37,13 +33,11 @@ public class AddEmployeePage extends CommonPage {
     @FindBy(xpath = "//div[label[contains(., 'Confirm Password')]]/following::input")
     public WebElement eConfirmPwdTextbox;
 
-    @FindBy(xpath = "//div[@class='oxd-switch-wrapper']//span")
-    public WebElement eCreateLoginToggle;
-
     @FindBy(xpath = "//div[@class='oxd-loading-spinner']")
     public WebElement eLoadingIndicator;
 
     public String alertMsg = "//div[contains(@class, 'oxd-toast-content')]";
+    public String toggleCreateLogin = "//div[@class='oxd-switch-wrapper']//span";
 
     public String pagePIM = "PIM";
     public String btnAdd = "Add";
@@ -52,7 +46,7 @@ public class AddEmployeePage extends CommonPage {
     public String btnSave = "Save";
 
     public void clickToCreateLoginToggle() {
-        clickToElement(eCreateLoginToggle);
+        clickToElement(driver, toggleCreateLogin);
     }
 
     public void createNewEmployee() throws FileNotFoundException {
@@ -62,7 +56,7 @@ public class AddEmployeePage extends CommonPage {
 
         employeeInfo = gson.fromJson(new FileReader(dataFilePath + "EmployeeInfo.json"), EmployeeInfo.class);
 
-        String firstName = employeeInfo.getFirstName();
+        String firstName = employeeInfo.getFirstName() + DataGenerator.generateRandomString(5);
         String middleName = employeeInfo.getMiddleName();
         String lastName = employeeInfo.getLastName();
         String username = employeeInfo.getUsername() + currentDateTime;
@@ -80,12 +74,7 @@ public class AddEmployeePage extends CommonPage {
         setText(eUserNameTextbox, username);
         setText(ePwdTextbox, password);
         setText(eConfirmPwdTextbox, password);
-        waitForLoadingIndicatorToDisappear(driver, eLoadingIndicator);
         clickToDynamicButtonByName(driver, btnSave);
-    }
-
-    public void verifyAlertSaveSuccessfully() {
-        verifyAlert(driver, alertMsg, alertSaveSuccessfully);
     }
 
     public void goToAddEmployeePage() {
@@ -93,5 +82,9 @@ public class AddEmployeePage extends CommonPage {
         clickToDynamicButtonByName(driver, btnAdd);
         waitForLoadingIndicatorToDisappear(driver, eLoadingIndicator);
         verifyMainTitle(txtAddEmployeeTitle);
+    }
+
+    public void verifyAlertSaveSuccessfully() {
+        verifyAlert(driver, alertMsg, alertSaveSuccessfully);
     }
 }
