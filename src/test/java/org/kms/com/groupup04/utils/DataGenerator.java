@@ -25,4 +25,13 @@ public class DataGenerator {
         }
         return sb.toString();
     }
+
+    public static String generateStringOfCharacters(int length, String charString, Random random) {
+        StringBuilder result = new StringBuilder();
+        while (length-- > 0) {
+            int index = random.nextInt(charString.length());
+            result.append(charString.charAt(index));
+        }
+        return result.toString();
+    }
 }

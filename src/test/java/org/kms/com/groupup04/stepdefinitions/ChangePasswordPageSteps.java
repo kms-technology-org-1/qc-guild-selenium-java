@@ -1,7 +1,6 @@
 package org.kms.com.groupup04.stepdefinitions;
 
 import io.cucumber.java.en.And;
-import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import org.kms.com.groupup04.commons.CustomException;
 import org.kms.com.groupup04.pageobjects.BasePage;
@@ -25,10 +24,5 @@ public class ChangePasswordPageSteps extends BasePage {
     @When("generating a new password with the length of {int} characters and {string} condition")
     public void generatingPasswordWithTheLengthOfCharactersAndCondition(int length, String condition) throws CustomException {
         changePasswordPage.generatePwdWithLengthAndCondition(length, condition);
-    }
-
-    @Then("verify alert message {string} is displayed")
-    public void verifyAlertSaveSuccessfully(String msg) {
-        changePasswordPage.verifyAlertMsg(msg);
     }
 }

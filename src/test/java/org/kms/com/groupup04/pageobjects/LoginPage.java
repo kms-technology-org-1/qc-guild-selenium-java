@@ -17,14 +17,9 @@ public class LoginPage extends CommonPage {
     @FindBy(xpath = "//button[contains(@type,'submit')]")
     public WebElement eLoginBtn;
 
-    @FindBy(xpath = "//div[@class='oxd-topbar-header-userarea']//li[contains(@class, 'oxd-userdropdown')]")
-    public static WebElement eUserProfileDdl;
-
-    @FindBy(xpath = "//ul[@role='menu']//a[text()='Logout']")
-    public static WebElement eLogoutDdo;
-
     public String ddlUserProfile = "//div[@class='oxd-topbar-header-userarea']//li[contains(@class, 'oxd-userdropdown')]";
     public String ddoLogout = "//ul[@role='menu']//a[text()='Logout']";
+
 
     public void navigateToLoginPage() {
         driver.get(config.getProperty("base_url") + LOGIN_PAGE_URL);

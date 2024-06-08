@@ -15,6 +15,5 @@ public class AddEmployeePageSteps extends BasePage {
     public void createESSAccount() throws FileNotFoundException {
         addEmployeePage.goToAddEmployeePage();
         addEmployeePage.createNewEmployee();
-        addEmployeePage.verifyAlertSaveSuccessfully();
     }
 }

@@ -22,7 +22,7 @@ public class LoginPageSteps extends BasePage {
         loginPage.login(config.getProperty("username"), config.getProperty("password"));
     }
 
-    @And("A user is on {string} page")
+    @And("user is on {string} page")
     public void userIsOnSpecificPage(String page) {
         Assert.assertEquals(driver.getCurrentUrl(), config.getProperty("base_url") + page);
     }

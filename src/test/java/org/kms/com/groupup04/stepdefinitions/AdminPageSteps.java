@@ -15,8 +15,8 @@ public class AdminPageSteps extends BasePage {
         adminPage.addNewPropertyInItemNameUnderQualifications(propertyName, value);
     }
 
-    @And("user deletes the record {string} with {string} to clean testing environment")
-    public void deleteRecordToCleanEnv(String propertyName, String propertyValue) throws CustomException {
-        adminPage.deleteRecordByNameInQualifications(propertyName, propertyValue);
+    @And("{string} record with {string} is displayed in table")
+    public void recordWithIsDisplayedInTable(String propertyName, String propertyValue) throws CustomException {
+        adminPage.verifyRecordWithTitleNameIsDisplayed(propertyName, propertyValue);
     }
 }

@@ -8,4 +8,4 @@ Feature: Login to OrangeHRM System
     Given user navigate to Login page
     Then page title is "OrangeHRM"
     When user logged in that page by Admin role
-    Then A user is on '/web/index.php/dashboard/index' page
+    Then user is on '/web/index.php/dashboard/index' page

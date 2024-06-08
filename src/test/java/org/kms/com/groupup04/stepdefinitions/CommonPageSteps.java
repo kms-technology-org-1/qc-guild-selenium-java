@@ -31,7 +31,6 @@ public class CommonPageSteps extends CommonPage {
     @When("user clicks {string} dropdown and select {string} item in top-bar menu")
     public void selectDropdownMenuItemByTxt(String dropdownName, String item) {
         selectDropdownMenuItemByText(dropdownName, item);
-        waitForLoadingIndicatorToDisappear(driver, eLoadingIndicator);
     }
 
     @When("user clicks {string} button")
@@ -39,7 +38,7 @@ public class CommonPageSteps extends CommonPage {
         clickToDynamicButtonByName(driver, btnName);
     }
 
-    @Then("verify the {string} with {string} is displayed in table")
+    @Then("verify the {string} record with {string} is displayed in table")
     public void verifyRecordNameIsDisplayedInTable(String propertyName, String propertyValue) throws CustomException {
         verifyRecordWithTitleNameIsDisplayed(propertyName, propertyValue);
     }
@@ -54,8 +53,8 @@ public class CommonPageSteps extends CommonPage {
         verifyValidationErrorMessage(msg, fieldName);
     }
 
-    @When("user deletes a record containing newly created ESS user to clean testing environment")
-    public void deleteUserByUserName() {
-        deleteNewlyCreatedESSUser();
+    @Then("verify alert message {string} is displayed")
+    public void verifyAlertMessage(String msg) {
+        verifyAlertMsg(msg);
     }
 }
