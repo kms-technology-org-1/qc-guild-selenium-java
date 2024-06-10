@@ -8,10 +8,8 @@ import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
 
 import java.time.Duration;
-import java.time.temporal.TemporalUnit;
-import java.util.concurrent.TimeUnit;
 
-import static org.kms.com.groupup04.utils.AppConfigs.*;
+import static org.kms.com.groupup04.utils.AppConfigs.TIMEOUT_LARGE;
 
 public class Hooks extends BasePage {
 

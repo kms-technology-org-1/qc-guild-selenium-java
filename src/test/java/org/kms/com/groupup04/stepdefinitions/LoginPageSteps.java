@@ -9,6 +9,7 @@ import org.openqa.selenium.support.PageFactory;
 import org.testng.Assert;
 
 public class LoginPageSteps extends BasePage {
+
     LoginPage loginPage = PageFactory.initElements(driver, LoginPage.class);
 
     @Given("user navigate to Login page")
@@ -16,13 +17,28 @@ public class LoginPageSteps extends BasePage {
         loginPage.navigateToLoginPage();
     }
 
-    @When("user perform login with valid credentials")
+    @When("user logged in that page by Admin role")
     public void userPerformLoginWithValidCredentials() {
         loginPage.login(config.getProperty("username"), config.getProperty("password"));
     }
 
-    @And("A user is on {string} page")
+    @And("user is on {string} page")
     public void userIsOnSpecificPage(String page) {
         Assert.assertEquals(driver.getCurrentUrl(), config.getProperty("base_url") + page);
+    }
+
+    @When("user logout their account")
+    public void logoutAccount() {
+        loginPage.logout();
+    }
+
+    @And("user login with newly created ESS account")
+    public void userLoginWithNewlyCreatedESSAccount() {
+        loginPage.loginWithESSAccount();
+    }
+
+    @And("user login with new password")
+    public void userLoginWithNewPassword() {
+        loginPage.loginWithESSAccount();
     }
 }

@@ -7,5 +7,5 @@ Feature: Login to OrangeHRM System
   Scenario: Login with valid credentials
     Given user navigate to Login page
     Then page title is "OrangeHRM"
-    When user perform login with valid credentials
-    Then A user is on '/web/index.php/dashboard/index' page
+    When user logged in that page by Admin role
+    Then user is on '/web/index.php/dashboard/index' page

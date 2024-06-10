@@ -1,40 +1,40 @@
 package org.kms.com.groupup04.pageobjects;
 
-import org.openqa.selenium.WebDriver;
+import org.kms.com.groupup04.commons.DTOHolder;
+import org.kms.com.groupup04.data.dto.EmployeeInfo;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
-public class LoginPage extends BasePage{
-    final WebDriver driver;
+public class LoginPage extends CommonPage {
     final String LOGIN_PAGE_URL = "/web/index.php/auth/login";
 
-    public LoginPage(WebDriver driver) {
-        this.driver = driver;
-    }
-
     @FindBy(xpath = "//input[@name='username']")
-    public WebElement eLoginNameTextbox;
+    public WebElement eLoginNameTxt;
 
     @FindBy(xpath = "//input[@name='password']")
-    public WebElement ePasswordTextbox;
+    public WebElement ePasswordTxt;
 
     @FindBy(xpath = "//button[contains(@type,'submit')]")
-    public WebElement eLoginButton;
+    public WebElement eLoginBtn;
 
-    public void navigateToLoginPage(){
+    public String ddlUserProfile = "//div[@class='oxd-topbar-header-userarea']//li[contains(@class, 'oxd-userdropdown')]";
+    public String ddoLogout = "//ul[@role='menu']//a[text()='Logout']";
+
+
+    public void navigateToLoginPage() {
         driver.get(config.getProperty("base_url") + LOGIN_PAGE_URL);
     }
 
     public void enterLoginName(String loginName) {
-        CommonPage.setText(eLoginNameTextbox, loginName);
+        setText(eLoginNameTxt, loginName);
     }
 
     public void enterPassword(String password) {
-        CommonPage.setText(ePasswordTextbox, password);
+        setText(ePasswordTxt, password);
     }
 
     public void clickLogin() {
-        eLoginButton.click();
+        eLoginBtn.click();
     }
 
     public void login(String username, String password) {
@@ -43,4 +43,15 @@ public class LoginPage extends BasePage{
         clickLogin();
     }
 
+    public void logout() {
+        clickToElement(driver, ddlUserProfile);
+        clickToElement(driver, ddoLogout);
+    }
+
+    public void loginWithESSAccount() {
+        EmployeeInfo employeeInfo = DTOHolder.getInstance().getEmployeeInfoDTO();
+        setText(eLoginNameTxt, employeeInfo.getUsername());
+        setText(ePasswordTxt, employeeInfo.getPassword());
+        clickLogin();
+    }
 }
